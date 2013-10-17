@@ -1,0 +1,35 @@
+env = Environment(CC = "gcc-4.9", CXX = "g++-4.9", CXXFLAGS = "-Wall -g -O0")
+
+libs = ['leveldb', 'snappy', 'pthread', 'sqlite3']
+test_libs = libs + ['gtest', 'gtest_main', 'hello_cpp']
+
+libs_path = []
+test_libs_path = libs_path + ['thirdparty/gtest/lib', '.']
+
+for sf in Glob('src/*.cpp'):
+    env.Program(target = sf.name.split('/')[-1][0:-4], 
+                source = [sf], 
+                CPPPATH = ['src', 'thirdparty/sqlite3'], 
+                LIBS = libs, 
+                LIBPATH = libs_path)
+
+for sf in Glob('lib/*.cpp'):
+    env.StaticLibrary(target = sf.name.split('/')[-1][0:-4], 
+                source = [sf], 
+                CPPPATH = ['lib'], 
+                LIBS = libs, 
+                LIBPATH = libs_path)
+
+for sf in Glob('thirdparty/sqlite3/*.c'):
+    env.StaticLibrary(target = sf.name.split('/')[-1][0:-4], 
+                source = [sf], 
+                CPPPATH = ['thirdparty/sqlite3'], 
+                LIBS = libs, 
+                LIBPATH = libs_path)
+
+for sf in Glob('unittest/*.cpp'):
+    env.Program(target = sf.name.split('/')[-1][0:-4] + '_unittest', 
+                source = [sf], 
+                CPPPATH = ['thirdparty/gtest/include', 'lib'], 
+                LIBS = test_libs, 
+                LIBPATH = test_libs_path)
