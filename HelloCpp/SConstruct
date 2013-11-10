@@ -1,4 +1,4 @@
-env = Environment(CC = "gcc-4.9", CXX = "g++-4.9", CXXFLAGS = "-Wall -g -O0")
+env = Environment(CC = "clang", CXX = "clang++", CXXFLAGS = "-Wall -g -O0")
 
 libs = ['leveldb', 'snappy', 'pthread', 'sqlite3']
 test_libs = libs + ['gtest', 'gtest_main', 'hello_cpp']
@@ -33,3 +33,14 @@ for sf in Glob('unittest/*.cpp'):
                 CPPPATH = ['thirdparty/gtest/include', 'lib'], 
                 LIBS = test_libs, 
                 LIBPATH = test_libs_path)
+
+env.Program(target = 'addressbook_writer', 
+            source = Glob('proto/addressbook_writer.cpp') + Glob('proto/addressbook.pb.cc'),
+            CPPPATH = ['proto'],
+            LIBS = ['protobuf'],
+            LIBPATH = [])
+env.Program(target = 'addressbook_reader', 
+            source = Glob('proto/addressbook_reader.cpp') + Glob('proto/addressbook.pb.cc'),
+            CPPPATH = ['proto'],
+            LIBS = ['protobuf'],
+            LIBPATH = [])
