@@ -1,0 +1,18 @@
+env = Environment(CC = "gcc", CXX = "g++", CXXFLAGS = "-Wall -g -O0 -isystem -c")
+
+env.Object(Glob("src/*.cc"), CPPPATH = ['include', '.'])
+
+env.StaticLibrary(target = 'gtest', 
+                source = ['src/gtest-all.o'], 
+                CPPPATH = ['include', '.'], 
+                LIBS = ['pthread'],
+                LIBPATH = [])
+
+env.StaticLibrary(target = 'gtest_main', 
+                source = ['src/gtest-all.o', 'src/gtest_main.o'], 
+                CPPPATH = ['include', '.'], 
+                LIBS = ['pthread'],
+                LIBPATH = [])
+
+for lib in Glob("*.a"):
+    env.Command('lib/' + lib.name, lib.name, Move("$TARGET", "$SOURCE")) 

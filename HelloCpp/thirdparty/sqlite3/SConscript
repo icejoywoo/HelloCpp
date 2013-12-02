@@ -1,0 +1,12 @@
+env = Environment(CC = "gcc", CXX = "g++", CXXFLAGS = "-Wall -g -O0")
+
+env.Object(Glob("src/*.c"), CPPPATH = ['include'])
+
+env.StaticLibrary(target = 'mysqlite3', 
+                source = Glob('src/*.o'), 
+                CPPPATH = ['include', '.'], 
+                LIBS = ['pthread'],
+                LIBPATH = [])
+
+for lib in Glob("*.a"):
+    env.Command('lib/' + lib.name, lib.name, Move("$TARGET", "$SOURCE")) 

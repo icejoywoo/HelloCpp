@@ -1,9 +1,12 @@
-env = Environment(CC = "clang", CXX = "clang++", CXXFLAGS = "-Wall -g -O0")
+env = Environment(CC = "gcc", CXX = "g++", CXXFLAGS = "-Wall -g -O0")
 
-libs = ['leveldb', 'snappy', 'pthread', 'sqlite3']
+env.SConscript('thirdparty/sqlite3/SConscript')
+env.SConscript('thirdparty/gtest/SConscript')
+
+libs = ['leveldb', 'snappy', 'pthread', 'mysqlite3', 'mysqlcppconn', 'tcmalloc']
 test_libs = libs + ['gtest', 'gtest_main', 'hello_cpp']
 
-libs_path = []
+libs_path = ['thirdparty/sqlite3/lib/']
 test_libs_path = libs_path + ['thirdparty/gtest/lib', '.']
 
 for sf in Glob('src/*.cpp'):
@@ -20,13 +23,6 @@ for sf in Glob('lib/*.cpp'):
                 LIBS = libs, 
                 LIBPATH = libs_path)
 
-for sf in Glob('thirdparty/sqlite3/*.c'):
-    env.StaticLibrary(target = sf.name.split('/')[-1][0:-4], 
-                source = [sf], 
-                CPPPATH = ['thirdparty/sqlite3'], 
-                LIBS = libs, 
-                LIBPATH = libs_path)
-
 for sf in Glob('unittest/*.cpp'):
     env.Program(target = sf.name.split('/')[-1][0:-4] + '_unittest', 
                 source = [sf], 
@@ -34,13 +30,15 @@ for sf in Glob('unittest/*.cpp'):
                 LIBS = test_libs, 
                 LIBPATH = test_libs_path)
 
+# proto
+env.Object('proto/addressbook.pb.cc')
 env.Program(target = 'addressbook_writer', 
-            source = Glob('proto/addressbook_writer.cpp') + Glob('proto/addressbook.pb.cc'),
+            source = Glob('proto/addressbook_writer.cpp') + Glob('proto/addressbook.pb.o'),
             CPPPATH = ['proto'],
             LIBS = ['protobuf'],
             LIBPATH = [])
 env.Program(target = 'addressbook_reader', 
-            source = Glob('proto/addressbook_reader.cpp') + Glob('proto/addressbook.pb.cc'),
+            source = Glob('proto/addressbook_reader.cpp') + Glob('proto/addressbook.pb.o'),
             CPPPATH = ['proto'],
             LIBS = ['protobuf'],
             LIBPATH = [])
