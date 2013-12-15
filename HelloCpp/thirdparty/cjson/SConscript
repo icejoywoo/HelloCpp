@@ -1,0 +1,9 @@
+env = Environment(CC = "gcc", CXX = "g++", CXXFLAGS = "-Wall -g -O0")
+
+env.Object(Glob("*.c"), CPPPATH = ['.'])
+
+env.StaticLibrary(target = 'cjson', 
+                source = Glob('*.o'), 
+                CPPPATH = ['.'], 
+                LIBS = ['pthread'],
+                LIBPATH = [])

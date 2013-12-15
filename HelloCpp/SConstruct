@@ -2,8 +2,10 @@ env = Environment(CC = "gcc", CXX = "g++", CXXFLAGS = "-Wall -g -O0")
 
 env.SConscript('thirdparty/sqlite3/SConscript')
 env.SConscript('thirdparty/gtest/SConscript')
+#env.SConscript('thirdparty/gmock/SConscript')
+env.SConscript('thirdparty/cjson/SConscript')
 
-libs = ['leveldb', 'snappy', 'pthread', 'mysqlite3', 'mysqlcppconn', 'tcmalloc']
+libs = ['leveldb', 'snappy', 'pthread', 'mysqlite3', 'mysqlcppconn', 'tcmalloc', 'curl']
 test_libs = libs + ['gtest', 'gtest_main', 'hello_cpp']
 
 libs_path = ['thirdparty/sqlite3/lib/']
