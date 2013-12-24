@@ -9,7 +9,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <curl/curl.h>
+#include "curl/curl.h"
+#include "cJSON.h"
 
 class Curly{
 private:
@@ -97,7 +98,7 @@ size_t Curly::HttpHeader(void* ptr, size_t size,
 int main (int argc, const char * argv[])
 {
     Curly curly;
-    if (curly.Fetch("http://www.baidu.com") == CURLE_OK){
+    if (curly.Fetch("http://api.douban.com/book/subject/1220562?alt=json") == CURLE_OK){
 
         std::cout << "status: " << curly.HttpStatus() << std::endl;
         std::cout << "type: " << curly.Type() << std::endl;
@@ -109,5 +110,11 @@ int main (int argc, const char * argv[])
 
         std::cout << "Content:\n" << curly.Content() << std::endl;
     }
+    // 解析json
+    std::string json = curly.Content();
+    cJSON* root = cJSON_Parse(json.c_str());
+    cJSON* category = cJSON_GetObjectItem(root,"category");
+    cJSON* term = cJSON_GetObjectItem(category, "@term");
+    printf("term: %s\n", cJSON_Print(term));
     return 0;
 }

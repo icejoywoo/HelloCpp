@@ -6,6 +6,7 @@
  */
 
 #include <cstdio>
+#include <memory>
 
 int main() {
 	FILE* fp;
@@ -25,5 +26,7 @@ int main() {
 		}
 	}
 	fclose(fp);
+	std::auto_ptr<int> p(new int(3));
+	printf("%d\n", *p.get());
 	return 0;
 }

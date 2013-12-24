@@ -5,16 +5,16 @@ env.SConscript('thirdparty/gtest/SConscript')
 #env.SConscript('thirdparty/gmock/SConscript')
 env.SConscript('thirdparty/cjson/SConscript')
 
-libs = ['leveldb', 'snappy', 'pthread', 'mysqlite3', 'mysqlcppconn', 'tcmalloc', 'curl']
+libs = ['leveldb', 'snappy', 'pthread', 'mysqlite3', 'mysqlcppconn', 'tcmalloc', 'curl', 'cjson', 'libevent']
 test_libs = libs + ['gtest', 'gtest_main', 'hello_cpp']
 
-libs_path = ['thirdparty/sqlite3/lib/']
+libs_path = ['thirdparty/cjson', 'thirdparty/sqlite3/lib/']
 test_libs_path = libs_path + ['thirdparty/gtest/lib', '.']
 
 for sf in Glob('src/*.cpp'):
     env.Program(target = sf.name.split('/')[-1][0:-4], 
                 source = [sf], 
-                CPPPATH = ['src', 'thirdparty/sqlite3'], 
+                CPPPATH = ['src', 'thirdparty/sqlite3', 'thirdparty/cjson'], 
                 LIBS = libs, 
                 LIBPATH = libs_path)
 
