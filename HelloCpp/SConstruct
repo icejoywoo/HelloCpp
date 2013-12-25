@@ -5,7 +5,7 @@ env.SConscript('thirdparty/gtest/SConscript')
 #env.SConscript('thirdparty/gmock/SConscript')
 env.SConscript('thirdparty/cjson/SConscript')
 
-libs = ['leveldb', 'snappy', 'pthread', 'mysqlite3', 'mysqlcppconn', 'tcmalloc', 'curl', 'cjson', 'libevent']
+libs = ['leveldb', 'snappy', 'pthread', 'mysqlite3', 'mysqlcppconn', 'tcmalloc', 'curl', 'cjson', 'event', 'event_pthreads']
 test_libs = libs + ['gtest', 'gtest_main', 'hello_cpp']
 
 libs_path = ['thirdparty/cjson', 'thirdparty/sqlite3/lib/']
