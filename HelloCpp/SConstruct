@@ -25,6 +25,13 @@ for sf in Glob('lib/*.cpp'):
                 LIBS = libs, 
                 LIBPATH = libs_path)
 
+for sf in Glob('p/*.cpp'):
+    env.Program(target = sf.name.split('/')[-1][0:-4], 
+                source = [sf], 
+                CPPPATH = ['p'], 
+                LIBS = libs, 
+                LIBPATH = libs_path)
+
 for sf in Glob('unittest/*.cpp'):
     env.Program(target = sf.name.split('/')[-1][0:-4] + '_unittest', 
                 source = [sf], 
