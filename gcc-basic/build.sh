@@ -13,7 +13,7 @@ g++ hello.cpp -o hello
 g++ -c base64.cpp -o base64.o -I./
 g++ -c base64_main.cpp -o base64_main.o -I./
 # build dynamic library
-g++ -shared base64.o -o libbase64.so
+g++ -shared base64.o -o libbase64.so -install_name @rpath/libbase64.so
 # build static library
 ar rvs libbase64.a base64.o
 
