@@ -28,3 +28,7 @@ rpath
 动态库的查找逻辑
 
 readelf/ patchelf 修改 binary？
+
+RAII 特性
+
+学习 google c++ 编程规范：https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/
