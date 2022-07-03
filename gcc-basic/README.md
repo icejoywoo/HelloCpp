@@ -14,6 +14,22 @@ make VERBOSE=1
 cmake -DCMAKE_FIND_DEBUG_MODE=1
 可以查看 find_xx 的具体查找路径，有很多 debug 日志
 
+```bash
+# default generator: make
+cmake ..
+make -j VERBOSE=1
+make clean
+
+# Ninja
+cmake .. -G Ninja
+# compile
+cmake --build .
+
+# ninja
+ninja -j 10
+ninja clean
+```
+
 # 其他
 
 查看动态库
