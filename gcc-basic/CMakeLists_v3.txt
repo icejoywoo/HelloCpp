@@ -1,0 +1,69 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(hello)
+
+# 3.12 之前的版本，可以使用自定义的函数来解决
+include("target_sources_local.cmake")
+
+add_executable(hello "")
+
+target_sources_local(hello
+    PRIVATE
+        hello.cpp
+)
+
+add_library(base64_shared SHARED "")
+set_target_properties(base64_shared PROPERTIES OUTPUT_NAME "base64")
+
+target_sources_local(base64_shared
+    PRIVATE
+        base64.cpp
+        base64-impl.h
+    PUBLIC
+        base64.h  # poor PUBLIC example, see discussion below for why
+)
+
+
+add_library(base64_static STATIC "")
+set_target_properties(base64_static PROPERTIES OUTPUT_NAME "base64")
+
+target_sources_local(base64_static
+    PRIVATE
+        base64.cpp
+    INTERFACE
+        base64.h  # poor PUBLIC example, see discussion below for why
+        base64-impl.h
+)
+
+
+add_executable(base64_main "")
+
+target_sources_local(base64_main
+    PRIVATE
+        base64_main.cpp
+        base64.cpp
+    INTERFACE
+        base64.h  # poor PUBLIC example, see discussion below for why
+        base64-impl.h
+)
+
+
+add_executable(base64_main_shared "")
+target_link_libraries(base64_main_shared base64_shared)
+
+target_sources_local(base64_main_shared
+    PRIVATE
+        base64_main.cpp
+    PUBLIC
+        base64.h  # poor PUBLIC example, see discussion below for why
+)
+
+add_executable(base64_main_static "")
+target_link_libraries(base64_main_static base64_static)
+
+target_sources_local(base64_main_static
+    PRIVATE
+        base64_main.cpp
+    PUBLIC
+        base64.h  # poor PUBLIC example, see discussion below for why
+)
