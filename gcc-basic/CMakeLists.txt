@@ -103,5 +103,12 @@ target_sources_local(base64_main_static
 )
 
 ## google test
-add_executable(unittest base64_test.cpp)
-target_link_libraries(unittest base64_static gtest gtest_main)
+enable_testing()
+
+add_test(base64_test base64_test)
+add_executable(base64_test base64_test.cpp)
+target_link_libraries(base64_test base64_static gtest gtest_main)
+
+add_test(string_test string_test)
+add_executable(string_test string_test.cpp)
+target_link_libraries(string_test gtest gtest_main)
