@@ -37,7 +37,7 @@ endif()
 
 # target_srouces https://crascit.com/2016/01/31/enhanced-source-file-handling-with-target_sources/
 # 3.12 之前的版本，可以使用自定义的函数来解决
-include("target_sources_local.cmake")
+include("cmake/target_sources_local.cmake")
 
 add_executable(hello "")
 
