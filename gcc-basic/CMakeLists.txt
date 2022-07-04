@@ -107,6 +107,8 @@ target_sources_local(base64_main_static
 # 1. enable_testing()
 enable_testing()
 # https://cmake.org/cmake/help/v3.21/module/GoogleTest.html
+# https://stackoverflow.com/questions/50861636/using-google-tests-with-cmake-ctest-with-the-new-command-gtest-discover-tests
+# https://www.kitware.com/dynamic-google-test-discovery-in-cmake-3-10/
 include(GoogleTest) # gtest_add_tests / gtest_discover_tests
 
 # 2. add_test
