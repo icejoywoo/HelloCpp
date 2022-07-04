@@ -1,7 +1,26 @@
 #include <gtest/gtest.h>
+#include <iostream>
 #include <string>
 
-TEST(Basic, StringTest)
+class StringTest : public testing::Test
+{
+public:
+    StringTest() {};
+    virtual ~StringTest() {};
+
+protected:
+    virtual void SetUp()
+    {
+        std::cout << "setup" << std::endl;
+    }
+
+    virtual void TearDown()
+    {
+        std::cout << "teardown" << std::endl;
+    }
+};
+
+TEST_F(StringTest, BasicTest)
 {
     std::string output;
     output = "Hello, World!";

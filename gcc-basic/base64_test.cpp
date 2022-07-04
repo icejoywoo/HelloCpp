@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include <string>
 
-TEST(Basic, Base64Test)
+TEST(Base64Test, BasicTest)
 {
     std::string output;
     EXPECT_EQ(0, encode64("Hello, World!", &output));
