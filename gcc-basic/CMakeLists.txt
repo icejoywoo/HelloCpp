@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 
 project(hello)
 
@@ -103,14 +103,21 @@ target_sources_local(base64_main_static
 )
 
 ## google test
+# https://blog.xizhibei.me/2020/04/05/cmake-4-test-with-google-test/
 # 1. enable_testing()
 enable_testing()
+# https://cmake.org/cmake/help/v3.21/module/GoogleTest.html
+include(GoogleTest) # gtest_add_tests / gtest_discover_tests
 
 # 2. add_test
-add_test(base64_test base64_test)
+# add_test is cmake built-in method
+#add_test(base64_test base64_test)
 add_executable(base64_test base64_test.cpp)
 target_link_libraries(base64_test base64_static gtest gtest_main)
+# gtest_add_tests for google test
+gtest_add_tests(TARGET base64_test AUTO)
 
-add_test(string_test string_test)
+#add_test(string_test string_test)
 add_executable(string_test string_test.cpp)
 target_link_libraries(string_test gtest gtest_main)
+gtest_add_tests(TARGET string_test AUTO)
