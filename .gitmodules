@@ -1,0 +1,6 @@
+[submodule "cpp-project/third_party/googletest"]
+	path = cpp-project/third_party/googletest
+	url = https://github.com/google/googletest.git
+[submodule "cpp-project/third_party/xsimd"]
+	path = cpp-project/third_party/xsimd
+	url = https://github.com/xtensor-stack/xsimd.git
