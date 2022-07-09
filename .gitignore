@@ -1,5 +1,8 @@
 # cmake build dir
 gcc-basic/build/
+cpp-project/build/
+
+.idea
 
 # vscode
 .vscode
