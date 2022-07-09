@@ -4,3 +4,6 @@
 [submodule "cpp-project/third_party/xsimd"]
 	path = cpp-project/third_party/xsimd
 	url = https://github.com/xtensor-stack/xsimd.git
+[submodule "velox_test/velox"]
+	path = velox_test/velox
+	url = https://github.com/facebookincubator/velox.git
