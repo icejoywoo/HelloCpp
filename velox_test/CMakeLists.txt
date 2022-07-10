@@ -114,3 +114,16 @@ add_subdirectory(jni_demo)
 #         protobuf::libprotobuf
 #         ${RE2}
 #         ${VELOX_LIBS})
+
+
+## google test
+# 1. enable_testing()
+enable_testing()
+include(GoogleTest) # gtest_add_tests / gtest_discover_tests
+
+# 2. add_test
+# add_test is cmake built-in method
+#add_test(string_test string_test)
+add_executable(string_test string_test.cc)
+target_link_libraries(string_test gtest gtest_main)
+gtest_add_tests(TARGET string_test AUTO)
