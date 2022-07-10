@@ -99,6 +99,8 @@ add_executable(velox_limit_demo velox_limit_demo.cc)
 target_link_libraries(velox_limit_demo velox_exec velox_exec_test_util velox_vector_test_lib)
 #target_link_libraries(velox_limit_demo ${VELOX_LIBS})
 
+add_subdirectory(jni_demo)
+
 # target_link_libraries(velox_limit_demo PRIVATE
 #         glog::glog
 #         xsimd
