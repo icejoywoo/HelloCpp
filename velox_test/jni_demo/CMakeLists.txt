@@ -15,6 +15,8 @@ set(JNI_SOURCE_FILES java_demo_jni.cpp)
 add_library(jnidemo SHARED ${JNI_SOURCE_FILES})
 target_link_libraries(jnidemo PRIVATE
         ${FOLLY}
+        gflags_shared
+        glog::glog
         velox_vector
         velox_exec
         velox_exec_test_util
