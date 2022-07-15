@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(modern-cpp-demo)
+project(velox_test_project C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -94,6 +94,8 @@ set(VELOX_LIBS
         velox_exception
         velox_dwio_dwrf_common)
 
+# add velox
+set(VELOX_BUILD_TESTING OFF)
 include_directories(velox)
 add_executable(velox_limit_demo velox_limit_demo.cc)
 target_link_libraries(velox_limit_demo velox_exec velox_exec_test_util velox_vector_test_lib)
