@@ -3,6 +3,9 @@ gcc-basic/build/
 cpp-project/build/
 
 .idea
+*.class
+
+.DS_Store
 
 # vscode
 .vscode
