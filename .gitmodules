@@ -7,3 +7,9 @@
 [submodule "velox_test/velox"]
 	path = velox_test/velox
 	url = https://github.com/facebookincubator/velox.git
+[submodule "arrow_demo/arrow"]
+	path = arrow_demo/thirdparty/arrow
+	url = https://github.com/apache/arrow.git
+[submodule "arrow_demo/thirdparty/simdjson"]
+	path = arrow_demo/thirdparty/simdjson
+	url = https://github.com/simdjson/simdjson.git
